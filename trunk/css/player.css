@@ -1,0 +1,52 @@
+.interface{}
+.interface .album{
+  height: 232px;
+  width: 25%;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+}
+.interface .album .record{
+  height: 213px;
+  width: 213px;
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 6px;
+  background: url('../images/album.png') right -449px no-repeat;
+  z-index: 1;
+}
+.interface .album .record-light{
+  height: 213px;
+  width: 213px;
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 6px;
+  background: url('../images/album.png') right -662px no-repeat;
+  z-index: 2;
+}
+.interface .album img.cover{
+  height: 220px;
+  width: 220px;
+  display: block;
+  margin: 0;
+  padding: 6px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('../images/album.png') 0 0 no-repeat;
+  z-index: 4;
+}
+.interface .album .glass{
+  height: 217px;
+  display: block;
+  margin: 0;
+  position: absolute;
+  top: 8px;
+  right: 80px;
+  left: 8px;
+  background: url('../images/album.png') right -232px no-repeat;
+  z-index: 3;
+}
