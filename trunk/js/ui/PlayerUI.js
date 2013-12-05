@@ -149,7 +149,7 @@ PlayerUI.apply = function(object, config, defaults){
      * @returns {boolean|Boolean|*}
      */
     isEmpty: function(v, allowBlank){
-      return v === null || v === undefined || ((iNet.isArray(v) && !v.length)) || (!allowBlank ? v === '' : false) || (!allowBlank ? v === ' ' : false);
+      return v === null || v === undefined || ((PlayerUI.isArray(v) && !v.length)) || (!allowBlank ? v === '' : false) || (!allowBlank ? v === ' ' : false);
     },
     /**
      * Returns true if the passed object is a email.
