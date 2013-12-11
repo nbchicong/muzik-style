@@ -158,7 +158,8 @@ $(function(){
      */
     player._init = function(){
       player.$srcPlayer.jPlayer({
-        cssSelector: cssSelector
+        cssSelector: cssSelector,
+        idPrefix: 'mz-player'
       });
       player.$srcPlayer.jPlayer('onSoundComplete', function(){
         nextSong();
