@@ -3,7 +3,7 @@
  *         on 09/12/2013.
  */
 $(function(){
-  PlayerUI.player = function(config){
+  PlayerUI.UIplayer = function(config){
     var _cog = config || {};
     PlayerUI.apply(this, _cog);
     this.id = this.id || 'mstyle-player';
@@ -23,7 +23,7 @@ $(function(){
       prev: $getId('player-ctrl-previous'),
       next: $getId('player-ctrl-next')
     };
-    var player = this;
+    var pplayer = this;
     var cssSelector = {
       videoPlay: ".jp-video-play",
       play: '#player-ctrl-play',
@@ -47,55 +47,62 @@ $(function(){
       gui: ".jp-gui",
       noSolution: ".jp-no-solution"
     };
-    var numSong = player.$list.children().length;
+    var numSong = pplayer.$list.children().length;
     var playSong = function(i){
-      var $song = player.$list.find('li').eq(i);
+      console.log('play song', i);
+      var $song = pplayer.$list.find('li').eq(i);
       var src = $song.find('audio').attr('src');
-      player.$list.find('.current-song').removeClass('current-song');
+      pplayer.$list.find('.current-song').removeClass('current-song');
       $song.find('a').addClass('current-song');
-      player._ready(src);
+      pplayer._ready(src);
     };
     var nextSong = function(){
-      var $currentSong = player.$list.find('.current-song');
+      log('next song');
+      var $currentSong = pplayer.$list.find('.current-song');
       var curIdx = $currentSong.parent().index();
+      log(numSong);
+      log(curIdx);
       var songIdx = (curIdx<numSong-1)?(curIdx+1):0;
       playSong(songIdx);
     };
     var prevSong = function(){
-      var $currentSong = player.$list.find('.current-song');
+      log('prev song');
+      var $currentSong = pplayer.$list.find('.current-song');
       var curIdx = $currentSong.parent().index();
       var songIdx = (curIdx-1>=0)?(curIdx-1):(numSong-1);
       playSong(songIdx);
     };
     var clickSong = function(){
+      log('remove song');
       var i = $(this).parent().index();
       playSong(i+1);
       return false;
     };
     var removeSong = function(){
+      log('remove song');
       var $this = $(this);
       var current = $this.parent().find('.current-song').length;
       $this.parent().remove();
       if(numSong>0 && current){
         nextSong();
       }else if(numSong==0){
-        player._clearPlayer();
+        pplayer._clearPlayer();
       }
       return false;
     };
     var addOne = function(songId, name, source){
-      player.$list.empty();
+      pplayer.$list.empty();
       var html = '<a href="javascript:;" class="current-song" tabindex="1">'+name+'</a>';
       html += '<span class="remove-song"></span>';
       html += '<audio src="'+source+'"></audio>';
       var $item = $('<li id="'+songId+'" class="current-song">'+html+'</li>');
-      player.$list.append($item);
+      pplayer.$list.append($item);
       $item.find('a').bind('click', clickSong);
       $item.find('.remove-song').bind('click', removeSong);
-      player._ready(source);
+      pplayer._ready(source);
     };
     var addToPlaylist = function(songId, name, source){
-      if(player.$list.find('#'+songId).length){
+      if(pplayer.$list.find('#'+songId).length){
         return;
       }
       var cls = (numSong==0)?'current-song':'';
@@ -103,38 +110,53 @@ $(function(){
       html += '<span class="remove-song"></span>';
       html += '<audio src="'+source+'"></audio>';
       var $item = $('<li id="'+songId+'" class="current-song">'+html+'</li>');
-      player.$list.append($item);
+      pplayer.$list.append($item);
       if(numSong==0){
-        player._ready(source);
+        pplayer._ready(source);
       }
       $item.find('a').bind('click', clickSong);
       $item.find('.remove-song').bind('click', removeSong);
     };
-    player._clearPlayer = function(){
-      player.$srcPlayer.jPlayer('clearMedia');
+    var getSong = function(idx){
+      var $song = null;
+      if(!!idx){
+        $song = pplayer.$list.find('li').eq(idx);
+      }else{
+        $song = pplayer.$list.find('li').eq(0);
+      }
+      var src = $song.find('audio').attr('src');
+      return src;
     };
-    player._ready = function(songSrc){
-      player.$srcPlayer.jPlayer({
+    pplayer._clearPlayer = function(){
+      pplayer.$srcPlayer.jPlayer('clearMedia');
+    };
+    pplayer._ready = function(){
+      var songSrc = getSong();
+      log(songSrc);
+      pplayer.$srcPlayer.jPlayer({
         ready: function(){
+          log($(this));
           $(this).jPlayer('setMedia', {
             mp3: songSrc
           });
         },
-        swfPath: 'flash/src',
-        supplied: 'mp3'
+        swfPath: 'js',
+        supplied: 'mp3',
+        wmode: "window",
+        smoothPlayBar: true
       });
     };
-    player.$ctrl.next.bind('click', function(){
+    pplayer.$ctrl.next.bind('click', function(){
       nextSong();
       $(this).blur();
       return;
     });
-    player.$ctrl.prev.bind('click', function(){
+    pplayer.$ctrl.prev.bind('click', function(){
       prevSong();
       $(this).blur();
       return;
     });
-    player.$wrap.find('.play-song').bind('click', function(){
+    pplayer.$wrap.find('.play-song').bind('click', function(){
       var $this = $(this);
       var $item = $this.parent().parent();
       var $info = $this.parent().sibling('.song-info');
@@ -143,7 +165,7 @@ $(function(){
       var source = $info.find('audio').prop('src');
       addOne(songId, name, source);
     });
-    player.$wrap.find('.add-list-song').bind('click', function(){
+    pplayer.$wrap.find('.add-list-song').bind('click', function(){
       var $this = $(this);
       var $item = $this.parent().parent();
       var $info = $this.parent().sibling('.song-info');
@@ -156,15 +178,20 @@ $(function(){
      * Innitialize the Player
      * (see jPlayer documentation for other options)
      */
-    player._init = function(){
-      player.$srcPlayer.jPlayer({
+    pplayer._init = function(){
+      log('init');
+      pplayer.$srcPlayer.jPlayer({
         cssSelector: cssSelector,
         idPrefix: 'mz-player'
       });
-      player.$srcPlayer.jPlayer('onSoundComplete', function(){
+      pplayer._ready();
+      pplayer.$srcPlayer.jPlayer('onSoundComplete', function(){
         nextSong();
       });
+
     };
-    player._init();
   };
+
+  var Cplayer = new PlayerUI.UIplayer();
+  Cplayer._init();
 });

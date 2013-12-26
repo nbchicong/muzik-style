@@ -4,7 +4,6 @@
  */
 
 (function(){
-  var clog = console.log || function(){};
   $getId = function(name){
     return $('#'+name);
   };
@@ -17,6 +16,6 @@
     return $.get(url, data, fn, 'json');
   };
   log = function(msg){
-    clog(msg);
+    console.log(msg);
   };
 })();
