@@ -1,3 +1,7 @@
+body{
+  color: #fff;
+  background: url("../images/top_bg.jpg") repeat;
+}
 .interface{}
 .interface .album{
   height: 232px;
@@ -49,4 +53,239 @@
   left: 8px;
   background: url('../images/album.png') right -232px no-repeat;
   z-index: 3;
+}
+/* ------------------ Player ------------------------*/
+.mstyle-ui-player{
+  width: 215px;
+  margin: 0px auto;
+  background:transparent url(../images/bg.png) repeat top left;
+}
+div.jp-single-player,
+div.player-playlist {
+
+  /* Edit the font-size to counteract inherited font sizing.
+   * Eg. 1.25em = 1 / 0.8em
+   */
+  font-size:1em; /* No parent CSS that can effect the size in these demos */
+  line-height:1.6;
+  color: #666;
+  margin-top:0px;
+}
+div.player-interface {
+  position: relative;
+  width:215px;
+  height:60px;
+  background:transparent url(../images/bg.png) repeat top left;
+  border-top: 1px solid #1D2D3D;
+}
+div.jp-single-player div.player-interface {
+  border-bottom:none;
+}
+div.player-interface ul.player-controls {
+  list-style-type:none;
+  padding:0;
+  margin: 0;
+}
+div.player-interface ul.player-controls li {
+  position: absolute;
+}
+div.player-interface ul.player-controls a {
+  position: absolute;
+  overflow:hidden;
+  text-indent:-9999px;
+}
+div.player-interface ul.player-controls a:hover{
+  opacity:1.0;
+  box-shadow: 0px 0px 10px 2px #001eff;
+  -moz-box-shadow:0px 0px 10px 2px #001eff;
+  -webkit-box-shadow:0px 0px 10px 2px #001eff;
+}
+a.player-ctrl-previous {
+  left:5px;
+  top:8px;
+  width:32px;
+  height:24px;
+  background: url(icons/playback_prev.png) no-repeat center center;
+}
+a.player-ctrl-previous:hover{
+  border-radius: 9px 0px 0px 9px;
+}
+div.player-playlist a.player-ctrl-play,
+div.player-playlist a.player-ctrl-pause {
+  left:33px;
+  top: 5px;
+  z-index: 999999;
+}
+a.player-ctrl-play {
+  background: url(icons/playback_play.png) no-repeat center center;
+  width:30px;
+  height:30px;
+}
+a.player-ctrl-pause {
+  background: url(icons/playback_pause.png) no-repeat center center;
+  display: none;
+  width:30px;
+  height:30px;
+}
+a.player-ctrl-play:hover, a.player-ctrl-pause:hover{
+  border-radius: 15px;
+}
+a.player-ctrl-next {
+  left:59px;
+  top:8px;
+  width:32px;
+  height:24px;
+  background: url(icons/playback_next.png) no-repeat center center;
+}
+a.player-ctrl-next:hover{
+  border-radius: 0px 9px 9px 0px;
+}
+a.player-ctrl-stop {
+  top:10px;
+  background: url(icons/playback_stop.png) no-repeat center center;
+  width:20px;
+  height:20px;
+}
+a.player-ctrl-stop:hover{
+  border-radius: 2px;
+}
+div.player-playlist a.player-ctrl-stop {
+  left:94px;
+}
+div.player-play-time,
+div.player-total-time {
+  position: absolute;
+  top:45px;
+  width:200px;
+  font-size:10px;
+  color:#fff;
+  height: 15px;
+}
+div.player-total-time {
+  text-align: right;
+}
+div.player-playlist div.player-play-time,
+div.player-playlist div.player-total-time {
+  left:7px;
+}
+div.player-progress-bar {
+  position: absolute;
+  overflow:hidden;
+  top:40px;
+  width:200px;
+  height:5px;
+  background: #000;
+  box-shadow: 0px 0px 5px 1px #001eff;
+}
+div.player-playlist div.player-progress-bar {
+  left:7px;
+}
+div.jp-load-bar {
+  background: url("jplayer.codrops.png") 0 0 repeat-x;
+  width:0px;
+  height:5px;
+  cursor: pointer;
+}
+div.player-play-bar {
+  background: url("jplayer.codrops.png") 0 -5px repeat-x ;
+  width:0px;
+  height:5px;
+}
+a.jp-volume-min {
+  top:10px;
+  background: url(icons/sound_mute.png) no-repeat center center;
+  width:20px;
+  height:20px;
+  left:115px;
+}
+a.jp-volume-max {
+  top:10px;
+  background: url(icons/sound_high.png) no-repeat center center;
+  width:20px;
+  height:20px;
+  left:192px;
+}
+a.jp-volume-min:hover, a.jp-volume-max:hover{
+  border-radius: 15px;
+}
+div.player-vol-bar {
+  position: absolute;
+  overflow:hidden;
+  top:18px;
+  background: url("jplayer.codrops.png") 0 0px repeat-x;
+  width:55px;
+  height:5px;
+  cursor: pointer;
+  left:135px;
+}
+div.player-vol-bar-value {
+  background: url("jplayer.codrops.png") 0 -10px repeat-x;
+  width:0px;
+  height:5px;
+}
+
+
+div.player-list {
+  padding-left: 2px;
+  width: 213px;
+  overflow: hidden;
+  height: 150px;
+  position:relative;
+}
+div.player-list .playlist-song{
+  width: 201px;
+  top:0;
+  float:left;
+  position:relative;
+}
+div.player-list ul{
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  border-top:none;
+  font-size:10px;
+  clear:both;
+}
+div.player-list::-webkit-scrollbar:horizontal{
+  display: none;
+}
+div.player-playlist div.player-list li {
+  padding:3px 5px 3px 5px;
+  margin:1px 0px;
+  background:transparent url(../images/bg.png) repeat top left;
+  cursor: move;
+}
+div.player-playlist div.player-list li:hover{
+  box-shadow: 0px 0px 5px 1px #001eff;
+}
+div.player-playlist div.player-list li:hover > a{
+  color:#fff;
+  text-shadow: 0px 0px 10px #ffff00;
+}
+div.player-playlist div.player-list li span{
+  width:15px;
+  height:15px;
+  float:right;
+  cursor: pointer;
+  background: url(icons/remove.png) no-repeat center center;
+}
+div.player-playlist div.player-list li span:hover{
+  box-shadow: 0px 0px 5px 2px #f00000;
+}
+div.player-playlist div.player-list li.current-song {
+}
+div.player-playlist div.player-list a {
+  color: #c0c0c0;
+  text-shadow:1px 1px 1px #000;
+  text-transform:uppercase;
+  text-decoration: none;
+}
+div.player-playlist div.player-list a:hover{
+  color:#fff;
+  text-shadow: 0px 0px 10px #ffff00;
+}
+div.player-playlist div.player-list a.current-song {
+  color:#fff;
+  font-weight: bold;
+  text-shadow: 0px 0px 10px #58ff58;
 }
